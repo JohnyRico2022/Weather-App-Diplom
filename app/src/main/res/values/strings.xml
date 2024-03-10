@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Weather App Diplom</string>
+
+    <string name="today">today</string>
+    <string name="week">week</string>
+    <string name="astro">astro</string>
+    <string name="account">account</string>
 </resources>

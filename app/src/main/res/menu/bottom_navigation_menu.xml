@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dayFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_today_24"
+        android:title="@string/today" />
+    <item
+        android:id="@+id/weekFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_week_24"
+        android:title="@string/week" />
+    <item
+        android:id="@+id/astroFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_astro_24"
+        android:title="@string/astro" />
+    <item
+        android:id="@+id/userInfoFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_account_24"
+        android:title="@string/account" />
+</menu>
