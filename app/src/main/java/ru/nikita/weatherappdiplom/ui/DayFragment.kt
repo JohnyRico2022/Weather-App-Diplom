@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.nikita.weatherappdiplom.R
 import ru.nikita.weatherappdiplom.databinding.FragmentDayBinding
+import ru.nikita.weatherappdiplom.dialogManager.InfoDialog
 import ru.nikita.weatherappdiplom.viewmodel.WeatherViewModel
 
 
@@ -29,11 +32,10 @@ class DayFragment : Fragment() {
         }
 
 
-
-
         viewModel.data.observe(viewLifecycleOwner) {
+
             binding.cityName.text = it.location.name
-            binding.currentTemp.text = it.current.temp_c.toString()
+            binding.currentTemp.text = "${it.current.temp_c} °C"
             binding.condition.text = it.current.condition.text
 
             Log.d("MyLog", "ICON: ${it.current.condition.icon}")
@@ -42,6 +44,15 @@ class DayFragment : Fragment() {
                 .load("https:" + it.current.condition.icon)
                 .timeout(10_000)
                 .into(binding.imageWeather)
+        }
+
+
+        binding.info.setOnClickListener {
+            InfoDialog().mainCardInfoDialog(requireContext())
+        }
+
+        binding.mainCard.setOnClickListener {
+            findNavController().navigate(R.id.action_dayFragment_to_fullCurrentWeatherFragment)
         }
 
 

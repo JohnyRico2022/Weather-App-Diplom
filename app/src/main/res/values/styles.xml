@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="parameter_name">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_gravity">start|center</item>
+        <item name="android:layout_marginStart">@dimen/common_spacing</item>
+    </style>
+
+    <style name="parameter_value">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_gravity">end|center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginEnd">@dimen/common_spacing</item>
+    </style>
+
+    <style name="data_card">
+        <item name="android:layout_marginStart">@dimen/common_spacing</item>
+        <item name="android:layout_marginTop">@dimen/large_spacing</item>
+        <item name="android:layout_marginEnd">@dimen/common_spacing</item>
+        <item name="android:background">@drawable/border</item>
+    </style>
+
+    <style name="edit_text_user_info">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/border</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginTop">@dimen/large_spacing</item>
+    </style>
+
+    <style name="radio_button" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/sea</item>
+    </style>
+
+</resources>

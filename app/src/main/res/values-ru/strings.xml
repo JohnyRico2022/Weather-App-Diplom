@@ -19,8 +19,8 @@
     <string name="moon_illumination">Освещенность луны</string>
     <string name="name_of_city">Введи город</string>
     <string name="info_main_card"> Для подробной информации кликни по карточке.\n Название города можно вводить как на Латинице, так и на Кирилице. Также можно ввести международный код Аэропорта.</string>
-    <string name="km_h">км/ч</string>
-    <string name="mm">мм</string>
+    <string name="km_h">%1$s км/ч</string>
+    <string name="mm">%1$s мм</string>
     <string name="today">сегодня</string>
     <string name="week">неделя</string>
     <string name="astro">астро</string>

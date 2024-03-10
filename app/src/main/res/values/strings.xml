@@ -18,8 +18,8 @@
     <string name="moon_illumination">Moon illumination</string>
     <string name="name_of_city">Name of city</string>
     <string name="info_main_card"> For detailed information, click on the card. \n The city name can be entered in both Latin and Cyrillic. \nYou can also enter the international code of the Airport.</string>
-    <string name="km_h">km/h</string>
-    <string name="mm">mm</string>
+    <string name="km_h">%1$s km/h</string>
+    <string name="mm">%1$s mm</string>
     <string name="today">today</string>
     <string name="week">week</string>
     <string name="astro">astro</string>
