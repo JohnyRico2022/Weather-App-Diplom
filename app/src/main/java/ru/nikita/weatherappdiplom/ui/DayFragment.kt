@@ -1,5 +1,6 @@
 package ru.nikita.weatherappdiplom.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,9 @@ import kotlinx.coroutines.launch
 import ru.nikita.weatherappdiplom.R
 import ru.nikita.weatherappdiplom.databinding.FragmentDayBinding
 import ru.nikita.weatherappdiplom.dialogManager.InfoDialog
+import ru.nikita.weatherappdiplom.utils.KEY_DATA
+import ru.nikita.weatherappdiplom.utils.KEY_DATA_CITY
+import ru.nikita.weatherappdiplom.utils.KEY_DATA_LANGUAGE
 import ru.nikita.weatherappdiplom.viewmodel.WeatherViewModel
 
 
@@ -27,11 +31,17 @@ class DayFragment : Fragment() {
     ): View {
         val binding = FragmentDayBinding.inflate(inflater, container, false)
 
+        val pref = this.requireActivity()
+            .getSharedPreferences(KEY_DATA, Context.MODE_PRIVATE)
+
+        val city = pref.getString(KEY_DATA_CITY, "Moscow").toString()
+        val language = pref.getString(KEY_DATA_LANGUAGE, "en").toString()
+
         binding.searchImage.setOnClickListener {
             val textCity = binding.searchCity.text.trim().toString()
 
             CoroutineScope(Dispatchers.Main).launch {
-                viewModel.getWeather(textCity)
+                viewModel.getWeather(textCity, language)
             }
 
             binding.searchCity.setText("")
@@ -39,8 +49,8 @@ class DayFragment : Fragment() {
 
 
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.getWeather("London")
-            Log.d("MyLog", "Запрос погоды")
+            viewModel.getWeather(city, language)
+
         }
 
 

@@ -1,5 +1,6 @@
 package ru.nikita.weatherappdiplom.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.nikita.weatherappdiplom.R
 import ru.nikita.weatherappdiplom.databinding.FragmentFullCurrentWeatherBinding
+import ru.nikita.weatherappdiplom.utils.KEY_DATA
+import ru.nikita.weatherappdiplom.utils.KEY_DATA_CITY
+import ru.nikita.weatherappdiplom.utils.KEY_DATA_LANGUAGE
 import ru.nikita.weatherappdiplom.viewmodel.WeatherViewModel
 
 class FullCurrentWeatherFragment : Fragment() {
@@ -24,8 +28,14 @@ class FullCurrentWeatherFragment : Fragment() {
     ): View {
         val binding = FragmentFullCurrentWeatherBinding.inflate(inflater, container, false)
 
+        val pref = this.requireActivity()
+            .getSharedPreferences(KEY_DATA, Context.MODE_PRIVATE)
+
+        val city = pref.getString(KEY_DATA_CITY, "Moscow").toString()
+        val language = pref.getString(KEY_DATA_LANGUAGE, "en").toString()
+
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.getWeather("London")
+            viewModel.getWeather(city, language)
         }
 
 

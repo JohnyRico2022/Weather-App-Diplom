@@ -12,14 +12,14 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
     val data = MutableLiveData<WeatherModel>()
 
 
-    suspend fun getWeather(city: String): MutableLiveData<WeatherModel> {
+    suspend fun getWeather(city: String, language: String): MutableLiveData<WeatherModel> {
         val response = WeatherApi.retrofitService.getWeatherData(
             "51e4803842ee448fa0795006222906",
             city,
             "3",
             "no",
             "no",
-            "eng"
+            language
         )
 
         data.value = response

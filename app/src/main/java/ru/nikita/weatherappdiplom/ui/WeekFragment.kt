@@ -21,10 +21,10 @@ class WeekFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val viewModel: WeatherViewModel by viewModels()
+  //      val viewModel: WeatherViewModel by viewModels()
         val binding = FragmentWeekBinding.inflate(inflater, container, false)
 
-        CoroutineScope(Dispatchers.Main).launch {
+       /* CoroutineScope(Dispatchers.Main).launch {
             viewModel.getWeather("London")
         }
 
@@ -36,10 +36,7 @@ class WeekFragment : Fragment() {
         binding.buttonX.setOnClickListener {
             Log.d("MyLog", "week fragment button clicked ")
 
-
-
-
-        }
+        }*/
 
 
 
