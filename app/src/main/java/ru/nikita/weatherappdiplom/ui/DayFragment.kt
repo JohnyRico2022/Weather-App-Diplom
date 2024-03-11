@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.nikita.weatherappdiplom.BuildConfig
 import ru.nikita.weatherappdiplom.R
 import ru.nikita.weatherappdiplom.databinding.FragmentDayBinding
 import ru.nikita.weatherappdiplom.dialogManager.AccessDialog
@@ -57,6 +58,8 @@ class DayFragment : Fragment() {
         val city = pref.getString(KEY_DATA_CITY, "Moscow").toString()
         val language = pref.getString(KEY_DATA_LANGUAGE, "en").toString()
 
+       /* val key = BuildConfig.MY_API_KEY
+        Log.d("MyLog", "Api key: $key")*/
 
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.getWeather(city, language)

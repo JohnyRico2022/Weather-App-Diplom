@@ -10,6 +10,6 @@ ext {
 
 private String getMyApiKey() {
     def properties = new Properties()
-    project.file("local.properties").withInputStream { properties.load(it) }
+    project.file("key.properties").withInputStream { properties.load(it) }
     return properties.getProperty("MY_API_KEY", "")
 }

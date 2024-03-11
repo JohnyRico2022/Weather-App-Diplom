@@ -28,6 +28,7 @@ class SettingsFragment : Fragment() {
             .getSharedPreferences(KEY_DATA, Context.MODE_PRIVATE)
 
         binding.versionInfoValue.text = BuildConfig.VERSION_NAME
+
         val getRating = pref.getFloat(KEY_DATA_RATING, 3.5f)
         val buttonChecked = pref.getInt(KEY_DATA_RADIO_BUTTON, R.id.ru_button)
 

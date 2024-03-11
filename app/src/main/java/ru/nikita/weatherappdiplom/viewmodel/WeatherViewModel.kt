@@ -14,6 +14,8 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
 
     private val apiKey = BuildConfig.MY_API_KEY
 
+
+
     suspend fun getWeather(city: String, language: String): MutableLiveData<WeatherModel> {
         val response = WeatherApi.retrofitService.getWeatherData(
             apiKey,
