@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import ru.nikita.weatherappdiplom.BuildConfig
 import ru.nikita.weatherappdiplom.R
 import ru.nikita.weatherappdiplom.databinding.FragmentSettingsBinding
 import ru.nikita.weatherappdiplom.utils.KEY_DATA
@@ -26,7 +27,7 @@ class SettingsFragment : Fragment() {
         val pref = this.requireActivity()
             .getSharedPreferences(KEY_DATA, Context.MODE_PRIVATE)
 
-//        binding.versionInfoValue.text = BuildConfig.VERSION_NAME
+        binding.versionInfoValue.text = BuildConfig.VERSION_NAME
         val getRating = pref.getFloat(KEY_DATA_RATING, 3.5f)
         val buttonChecked = pref.getInt(KEY_DATA_RADIO_BUTTON, R.id.ru_button)
 
