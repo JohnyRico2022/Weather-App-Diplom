@@ -25,7 +25,7 @@ class FullCurrentWeatherFragment : Fragment() {
         val binding = FragmentFullCurrentWeatherBinding.inflate(inflater, container, false)
 
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.getWeather()
+            viewModel.getWeather("London")
         }
 
 

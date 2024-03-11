@@ -1,14 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_weather_day"
     tools:context=".ui.AstroFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Astro"
-        android:gravity="center"/>
+        android:id="@+id/moonHelper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="222"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-</FrameLayout>
+    <FrameLayout
+        android:id="@+id/frame_layout_top"
+        style="@style/data_card"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    style="@style/parameter_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sun_rise" />
+
+                <TextView
+                    android:id="@+id/sun_rise_value"
+                    style="@style/parameter_value"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    tools:text="00" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    style="@style/parameter_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sun_set" />
+
+                <TextView
+                    android:id="@+id/sun_set_value"
+                    style="@style/parameter_value"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    tools:text="00" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    style="@style/parameter_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/moon_rise" />
+
+                <TextView
+                    android:id="@+id/moon_rise_value"
+                    style="@style/parameter_value"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    tools:text="00" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    style="@style/parameter_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/moon_set" />
+
+                <TextView
+                    android:id="@+id/moon_set_value"
+                    style="@style/parameter_value"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    tools:text="00" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    style="@style/parameter_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/moon_illumination" />
+
+                <TextView
+                    android:id="@+id/moon_illumination_value"
+                    style="@style/parameter_value"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    tools:text="00" />
+
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_layout_bottom"
+        style="@style/data_card"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_layout_top">
+
+        <TextView
+            android:id="@+id/moon_phase_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_spacing"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="italic"
+            tools:text="Значение Фазы" />
+
+        <ImageView
+            android:id="@+id/moon_phase_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="@dimen/common_spacing"
+            android:contentDescription="@string/moon_phase_description"
+            tools:src="@drawable/waning_crescent" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/no_access_card_astro_fragment"
+        style="@style/data_card"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_access_text"
+            android:textSize="33sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/common_spacing"
+            android:layout_marginEnd="@dimen/common_spacing"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

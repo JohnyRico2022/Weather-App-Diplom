@@ -27,19 +27,28 @@ class DayFragment : Fragment() {
     ): View {
         val binding = FragmentDayBinding.inflate(inflater, container, false)
 
+        binding.searchImage.setOnClickListener {
+            val textCity = binding.searchCity.text.trim().toString()
+
+            CoroutineScope(Dispatchers.Main).launch {
+                viewModel.getWeather(textCity)
+            }
+
+            binding.searchCity.setText("")
+        }
+
+
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.getWeather()
+            viewModel.getWeather("London")
+            Log.d("MyLog", "Запрос погоды")
         }
 
 
         viewModel.data.observe(viewLifecycleOwner) {
-
+            Log.d("MyLog", "day fragment: ${it.current.condition.icon}")
             binding.cityName.text = it.location.name
             binding.currentTemp.text = "${it.current.temp_c} °C"
             binding.condition.text = it.current.condition.text
-
-            Log.d("MyLog", "ICON: ${it.current.condition.icon}")
-
             Glide.with(binding.imageWeather)
                 .load("https:" + it.current.condition.icon)
                 .timeout(10_000)

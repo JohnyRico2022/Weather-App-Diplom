@@ -28,7 +28,7 @@ val retrofit: Retrofit = Retrofit.Builder()
     .build()
 
 object WeatherApi {
-    val retrofitService by lazy {
+    val retrofitService: WeatherApiService by lazy {
         retrofit.create(WeatherApiService::class.java)
     }
 }

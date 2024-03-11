@@ -6,9 +6,16 @@
     tools:context=".ui.WeekFragment">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Week"
+        android:text="111"
         android:gravity="center"/>
+
+    <Button
+        android:id="@+id/buttonX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="go" />
 
 </FrameLayout>
