@@ -4,15 +4,17 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.nikita.weatherappdiplom.BuildConfig
+import ru.nikita.weatherappdiplom.dto.Hour
 import ru.nikita.weatherappdiplom.dto.WeatherModel
 import ru.nikita.weatherappdiplom.service.WeatherApi
 
 class WeatherViewModel(application: Application) : AndroidViewModel(application) {
 
     val data = MutableLiveData<WeatherModel>()
+    val dataHour = MutableLiveData<List<Hour>>()
+
 
     private val apiKey = BuildConfig.MY_API_KEY
-
     suspend fun getWeather(city: String, language: String): MutableLiveData<WeatherModel> {
 
         val response = WeatherApi.retrofitService.getWeatherData(

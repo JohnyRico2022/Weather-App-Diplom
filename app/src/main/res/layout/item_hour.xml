@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/common_spacing"
@@ -12,7 +11,7 @@
     app:cardCornerRadius="10dp">
 
     <TextView
-        android:id="@+id/date_item_week"
+        android:id="@+id/date_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/common_spacing"
@@ -24,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/condition_item_week"
+        android:id="@+id/condition_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
@@ -33,11 +32,11 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/date_item_week"
-        app:layout_constraintTop_toBottomOf="@+id/date_item_week" />
+        app:layout_constraintStart_toStartOf="@+id/date_item"
+        app:layout_constraintTop_toBottomOf="@+id/date_item" />
 
     <ImageView
-        android:id="@+id/image_item_week"
+        android:id="@+id/image_item"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="@dimen/common_spacing"
@@ -47,7 +46,7 @@
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
-        android:id="@+id/temp_item_week"
+        android:id="@+id/temp_item"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/common_spacing"
@@ -56,8 +55,8 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/image_item_week"
-        app:layout_constraintStart_toEndOf="@+id/date_item_week"
+        app:layout_constraintEnd_toStartOf="@+id/image_item"
+        app:layout_constraintStart_toEndOf="@+id/date_item"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

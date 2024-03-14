@@ -30,7 +30,7 @@ class SettingsFragment : Fragment() {
         binding.versionInfoValue.text = BuildConfig.VERSION_NAME
 
         val getRating = pref.getFloat(KEY_SETTINGS_RATING, 3.5f)
-        val buttonChecked = pref.getInt(KEY_SETTINGS_RADIO_BUTTON, R.id.ru_button)
+        val buttonChecked = pref.getInt(KEY_SETTINGS_RADIO_BUTTON, R.id.en_button)
 
         binding.backToFragmentUser.setOnClickListener {
             findNavController().popBackStack(R.id.userInfoFragment, false)
