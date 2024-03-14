@@ -11,6 +11,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.nikita.weatherappdiplom.databinding.FragmentAstroBinding
+import ru.nikita.weatherappdiplom.utils.KEY_AUTH
+import ru.nikita.weatherappdiplom.utils.KEY_AUTH_SIGNIN
+import ru.nikita.weatherappdiplom.utils.KEY_AUTH_SIGNUP
 import ru.nikita.weatherappdiplom.utils.KEY_DATA
 import ru.nikita.weatherappdiplom.utils.KEY_DATA_CITY
 import ru.nikita.weatherappdiplom.utils.KEY_DATA_LANGUAGE
@@ -29,9 +32,16 @@ class AstroFragment : Fragment() {
 
         val pref = this.requireActivity()
             .getSharedPreferences(KEY_DATA, Context.MODE_PRIVATE)
-
         val city = pref.getString(KEY_DATA_CITY, "Moscow").toString()
         val language = pref.getString(KEY_DATA_LANGUAGE, "en").toString()
+
+        val preferences = this.requireActivity()
+            .getSharedPreferences(KEY_AUTH, Context.MODE_PRIVATE)
+
+        val userSignUp = preferences.getString(KEY_AUTH_SIGNIN, "signIn").toString()
+        val userSignIn = preferences.getString(KEY_AUTH_SIGNUP, "signUp").toString()
+        updateUI(binding, userSignIn, userSignUp)
+
 
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.getWeather(city, language)
@@ -64,4 +74,17 @@ class AstroFragment : Fragment() {
 
         return binding.root
     }
+
+    private fun updateUI(binding: FragmentAstroBinding, signInPref: String, signUpPref: String) {
+        if (signInPref == signUpPref) {
+            binding.frameLayoutBottom.visibility = View.VISIBLE
+            binding.frameLayoutTop.visibility = View.VISIBLE
+            binding.noAccessCardAstroFragment.visibility = View.GONE
+        } else {
+            binding.frameLayoutBottom.visibility = View.GONE
+            binding.frameLayoutTop.visibility = View.GONE
+            binding.noAccessCardAstroFragment.visibility = View.VISIBLE
+        }
+    }
+
 }

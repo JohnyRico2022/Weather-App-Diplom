@@ -21,7 +21,7 @@
         style="@style/data_card"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -138,7 +138,7 @@
         style="@style/data_card"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frame_layout_top">
@@ -170,7 +170,7 @@
         style="@style/data_card"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

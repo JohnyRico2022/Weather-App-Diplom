@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "845976251883",
+    "project_id": "weather-app-diplom",
+    "storage_bucket": "weather-app-diplom.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845976251883:android:176c670ce3e2cda71f7dae",
+        "android_client_info": {
+          "package_name": "ru.nikita.weatherappdiplom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg8OxC7U-pJe71nHfOIvpu-T48XlvFCBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
