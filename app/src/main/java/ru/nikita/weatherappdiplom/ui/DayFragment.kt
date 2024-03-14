@@ -32,9 +32,10 @@ import ru.nikita.weatherappdiplom.dialogManager.DialogClickListener
 import ru.nikita.weatherappdiplom.dialogManager.InfoDialog
 import ru.nikita.weatherappdiplom.dialogManager.LocationDialog
 import ru.nikita.weatherappdiplom.utils.AndroidUtils
-import ru.nikita.weatherappdiplom.utils.KEY_DATA
-import ru.nikita.weatherappdiplom.utils.KEY_DATA_CITY
-import ru.nikita.weatherappdiplom.utils.KEY_DATA_LANGUAGE
+import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS
+import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS_LANGUAGE
+import ru.nikita.weatherappdiplom.utils.KEY_WEATHER
+import ru.nikita.weatherappdiplom.utils.KEY_WEATHER_CITY
 import ru.nikita.weatherappdiplom.viewmodel.WeatherViewModel
 import ru.nikita.weatherappdiplom.utils.isPermissionGranted
 
@@ -50,13 +51,16 @@ class DayFragment : Fragment() {
     ): View {
         val binding = FragmentDayBinding.inflate(inflater, container, false)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
         checkPermission()
-        val pref = this.requireActivity()
-            .getSharedPreferences(KEY_DATA, Context.MODE_PRIVATE)
 
-        val city = pref.getString(KEY_DATA_CITY, "Moscow").toString()
-        val language = pref.getString(KEY_DATA_LANGUAGE, "en").toString()
+        val prefSettings = this.requireActivity()
+            .getSharedPreferences(KEY_SETTINGS, Context.MODE_PRIVATE)
+        val language = prefSettings.getString(KEY_SETTINGS_LANGUAGE, "en").toString()
 
+        val prefWeather = this.requireActivity()
+            .getSharedPreferences(KEY_WEATHER, Context.MODE_PRIVATE)
+        val city = prefWeather.getString(KEY_WEATHER_CITY, "Moscow").toString()
 
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.getWeather(city, language)
@@ -67,8 +71,8 @@ class DayFragment : Fragment() {
             val textCity = binding.searchCity.text.trim().toString()
 
             if (textCity.length > 2) {
-                pref.edit()
-                    .putString(KEY_DATA_CITY, textCity)
+                prefWeather.edit()
+                    .putString(KEY_WEATHER_CITY, textCity)
                     .apply()
                 AndroidUtils.hideKeyboard(requireView())
                 CoroutineScope(Dispatchers.Main).launch {
@@ -126,10 +130,11 @@ class DayFragment : Fragment() {
             })
             return
         } else {
-
-            val pref = this.requireActivity()
-                .getSharedPreferences(KEY_DATA, Context.MODE_PRIVATE)
-            val language = pref.getString(KEY_DATA_LANGUAGE, "en").toString()
+            val prefsWeather = this.requireActivity()
+                .getSharedPreferences(KEY_WEATHER, Context.MODE_PRIVATE)
+            val prefsSettings = this.requireActivity()
+                .getSharedPreferences(KEY_SETTINGS, Context.MODE_PRIVATE)
+            val language = prefsSettings.getString(KEY_SETTINGS_LANGUAGE, "en").toString()
 
             val token = CancellationTokenSource()
 
@@ -158,8 +163,8 @@ class DayFragment : Fragment() {
                         viewModel.getWeather(currentCity, language)
                     }
 
-                    pref.edit()
-                        .putString(KEY_DATA_CITY, currentCity)
+                    prefsWeather.edit()
+                        .putString(KEY_WEATHER_CITY, currentCity)
                         .apply()
                 }
         }

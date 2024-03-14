@@ -17,5 +17,4 @@ class AccessDialog() {
             .setNegativeButton(R.string.cancel) { _, _ -> }
             .show()
     }
-
 }

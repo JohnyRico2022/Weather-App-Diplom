@@ -14,7 +14,6 @@ class InfoDialog {
             .setMessage(R.string.info_main_card)
             .setPositiveButton(R.string.i_understand) { _, _ -> }
             .show()
-
     }
 
     fun registrationInfoDialog(context: Context) {
@@ -25,6 +24,5 @@ class InfoDialog {
             .setMessage(R.string.text_in_dialog)
             .setPositiveButton(R.string.i_understand) { _, _ -> }
             .show()
-
     }
 }

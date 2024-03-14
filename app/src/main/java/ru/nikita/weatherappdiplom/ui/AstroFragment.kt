@@ -14,9 +14,9 @@ import ru.nikita.weatherappdiplom.databinding.FragmentAstroBinding
 import ru.nikita.weatherappdiplom.utils.KEY_AUTH
 import ru.nikita.weatherappdiplom.utils.KEY_AUTH_SIGNIN
 import ru.nikita.weatherappdiplom.utils.KEY_AUTH_SIGNUP
-import ru.nikita.weatherappdiplom.utils.KEY_DATA
-import ru.nikita.weatherappdiplom.utils.KEY_DATA_CITY
-import ru.nikita.weatherappdiplom.utils.KEY_DATA_LANGUAGE
+import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS
+import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS_LANGUAGE
+import ru.nikita.weatherappdiplom.utils.KEY_WEATHER_CITY
 import ru.nikita.weatherappdiplom.utils.MoonPhases
 import ru.nikita.weatherappdiplom.viewmodel.WeatherViewModel
 
@@ -30,14 +30,16 @@ class AstroFragment : Fragment() {
         val viewModel: WeatherViewModel by viewModels()
         val binding = FragmentAstroBinding.inflate(inflater, container, false)
 
-        val pref = this.requireActivity()
-            .getSharedPreferences(KEY_DATA, Context.MODE_PRIVATE)
-        val city = pref.getString(KEY_DATA_CITY, "Moscow").toString()
-        val language = pref.getString(KEY_DATA_LANGUAGE, "en").toString()
+        val prefSettings = this.requireActivity()
+            .getSharedPreferences(KEY_SETTINGS, Context.MODE_PRIVATE)
+        val language = prefSettings.getString(KEY_SETTINGS_LANGUAGE, "en").toString()
+
+        val prefWeather = this.requireActivity()
+            .getSharedPreferences(KEY_SETTINGS, Context.MODE_PRIVATE)
+        val city = prefWeather.getString(KEY_WEATHER_CITY, "Moscow").toString()
 
         val preferences = this.requireActivity()
             .getSharedPreferences(KEY_AUTH, Context.MODE_PRIVATE)
-
         val userSignUp = preferences.getString(KEY_AUTH_SIGNIN, "signIn").toString()
         val userSignIn = preferences.getString(KEY_AUTH_SIGNUP, "signUp").toString()
         updateUI(binding, userSignIn, userSignUp)
@@ -46,7 +48,6 @@ class AstroFragment : Fragment() {
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.getWeather(city, language)
         }
-
 
 
         viewModel.data.observe(viewLifecycleOwner) {
@@ -71,7 +72,6 @@ class AstroFragment : Fragment() {
                 moonPhaseImage.setImageResource(MoonPhases().setMoonImage(moonPhaseString))
             }
         }
-
         return binding.root
     }
 
@@ -86,5 +86,4 @@ class AstroFragment : Fragment() {
             binding.noAccessCardAstroFragment.visibility = View.VISIBLE
         }
     }
-
 }

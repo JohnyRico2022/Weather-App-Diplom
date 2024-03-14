@@ -11,10 +11,10 @@ import androidx.navigation.fragment.findNavController
 import ru.nikita.weatherappdiplom.BuildConfig
 import ru.nikita.weatherappdiplom.R
 import ru.nikita.weatherappdiplom.databinding.FragmentSettingsBinding
-import ru.nikita.weatherappdiplom.utils.KEY_DATA
-import ru.nikita.weatherappdiplom.utils.KEY_DATA_LANGUAGE
-import ru.nikita.weatherappdiplom.utils.KEY_DATA_RADIO_BUTTON
-import ru.nikita.weatherappdiplom.utils.KEY_DATA_RATING
+import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS
+import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS_LANGUAGE
+import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS_RADIO_BUTTON
+import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS_RATING
 
 class SettingsFragment : Fragment() {
 
@@ -25,12 +25,12 @@ class SettingsFragment : Fragment() {
        val binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
         val pref = this.requireActivity()
-            .getSharedPreferences(KEY_DATA, Context.MODE_PRIVATE)
+            .getSharedPreferences(KEY_SETTINGS, Context.MODE_PRIVATE)
 
         binding.versionInfoValue.text = BuildConfig.VERSION_NAME
 
-        val getRating = pref.getFloat(KEY_DATA_RATING, 3.5f)
-        val buttonChecked = pref.getInt(KEY_DATA_RADIO_BUTTON, R.id.ru_button)
+        val getRating = pref.getFloat(KEY_SETTINGS_RATING, 3.5f)
+        val buttonChecked = pref.getInt(KEY_SETTINGS_RADIO_BUTTON, R.id.ru_button)
 
         binding.backToFragmentUser.setOnClickListener {
             findNavController().popBackStack(R.id.userInfoFragment, false)
@@ -42,22 +42,22 @@ class SettingsFragment : Fragment() {
         binding.ruButton.setOnClickListener {
             val lang = "ru"
             pref.edit()
-                .putString(KEY_DATA_LANGUAGE, lang)
-                .putInt(KEY_DATA_RADIO_BUTTON, R.id.ru_button)
+                .putString(KEY_SETTINGS_LANGUAGE, lang)
+                .putInt(KEY_SETTINGS_RADIO_BUTTON, R.id.ru_button)
                 .apply()
         }
         binding.enButton.setOnClickListener {
             val lang = "en"
             pref.edit()
-                .putString(KEY_DATA_LANGUAGE, lang)
-                .putInt(KEY_DATA_RADIO_BUTTON, R.id.en_button)
+                .putString(KEY_SETTINGS_LANGUAGE, lang)
+                .putInt(KEY_SETTINGS_RADIO_BUTTON, R.id.en_button)
                 .apply()
         }
         binding.itButton.setOnClickListener {
             val lang = "it"
             pref.edit()
-                .putString(KEY_DATA_LANGUAGE, lang)
-                .putInt(KEY_DATA_RADIO_BUTTON, R.id.it_button)
+                .putString(KEY_SETTINGS_LANGUAGE, lang)
+                .putInt(KEY_SETTINGS_RADIO_BUTTON, R.id.it_button)
                 .apply()
         }
 
@@ -68,7 +68,7 @@ class SettingsFragment : Fragment() {
 
             binding.ratingButton.setOnClickListener {
                 pref.edit()
-                    .putFloat(KEY_DATA_RATING, rating)
+                    .putFloat(KEY_SETTINGS_RATING, rating)
                     .apply()
 
 

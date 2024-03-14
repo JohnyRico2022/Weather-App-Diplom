@@ -11,9 +11,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.nikita.weatherappdiplom.databinding.FragmentWeekBinding
-import ru.nikita.weatherappdiplom.utils.KEY_DATA
-import ru.nikita.weatherappdiplom.utils.KEY_DATA_CITY
-import ru.nikita.weatherappdiplom.utils.KEY_DATA_LANGUAGE
+import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS
+import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS_LANGUAGE
+import ru.nikita.weatherappdiplom.utils.KEY_WEATHER
+import ru.nikita.weatherappdiplom.utils.KEY_WEATHER_CITY
 import ru.nikita.weatherappdiplom.viewmodel.WeatherViewModel
 
 
@@ -27,11 +28,13 @@ class WeekFragment : Fragment() {
         val viewModel: WeatherViewModel by viewModels()
         val binding = FragmentWeekBinding.inflate(inflater, container, false)
 
-        val pref = this.requireActivity()
-            .getSharedPreferences(KEY_DATA, Context.MODE_PRIVATE)
+        val prefSettings = this.requireActivity()
+            .getSharedPreferences(KEY_SETTINGS, Context.MODE_PRIVATE)
+        val language = prefSettings.getString(KEY_SETTINGS_LANGUAGE, "en").toString()
 
-        val city = pref.getString(KEY_DATA_CITY, "Moscow").toString()
-        val language = pref.getString(KEY_DATA_LANGUAGE, "en").toString()
+        val prefWeather = this.requireActivity()
+            .getSharedPreferences(KEY_WEATHER, Context.MODE_PRIVATE)
+        val city = prefWeather.getString(KEY_WEATHER_CITY, "Moscow").toString()
 
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.getWeather(city, language)
