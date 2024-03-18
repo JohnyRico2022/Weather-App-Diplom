@@ -65,7 +65,7 @@ class WeekFragment : Fragment() {
         binding.daysRecycler.adapter = adapterDays
 
         viewModel.data.observe(viewLifecycleOwner){
-            adapterDays.submitList(it.forecast.forecastday)
+            adapterDays.submitList(it!!.forecast.forecastday)
         }
 
 

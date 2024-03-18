@@ -69,5 +69,7 @@
     <string name="city_does_not_exist">A city like this does not exist!</string>
     <string name="access_key_error">Access key error (API key)!</string>
     <string name="rates_this_app">Your rating: %1$s. Thank you for rating!</string>
+    <string name="error_city_name">Incorrect city name! Try again!</string>
+    <string name="internet_error">Houston, we have a problem! Looks like there is a problem with the internet! Check if airplane mode is turned on!</string>
 
 </resources>

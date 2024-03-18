@@ -52,7 +52,7 @@ class AstroFragment : Fragment() {
 
         viewModel.data.observe(viewLifecycleOwner) {
 
-            val moonPhaseString = it.forecast.forecastday[0].astro.moon_phase
+            val moonPhaseString = it!!.forecast.forecastday[0].astro.moon_phase
 
             // Вспомогательный блок кода для перевода фазы луны при смене языка.
             // Прямой подстановкой работает не корректно!

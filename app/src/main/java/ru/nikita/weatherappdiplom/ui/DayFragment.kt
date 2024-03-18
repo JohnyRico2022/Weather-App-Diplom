@@ -12,9 +12,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -31,6 +33,7 @@ import ru.nikita.weatherappdiplom.dialogManager.AccessDialog
 import ru.nikita.weatherappdiplom.dialogManager.DialogClickListener
 import ru.nikita.weatherappdiplom.dialogManager.InfoDialog
 import ru.nikita.weatherappdiplom.dialogManager.LocationDialog
+import ru.nikita.weatherappdiplom.model.WeatherState
 import ru.nikita.weatherappdiplom.utils.AndroidUtils
 import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS
 import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS_LANGUAGE
@@ -66,6 +69,28 @@ class DayFragment : Fragment() {
             viewModel.getWeather(city, language)
         }
 
+        viewModel.stateData.observe(viewLifecycleOwner) { state ->
+
+            if (state.success) {
+                binding.mainGroup.visibility = View.VISIBLE
+                binding.progress.visibility = View.GONE
+                binding.errorText.visibility = View.GONE
+                binding.errorGroup.visibility = View.GONE
+            }
+            if (state.error) {
+                binding.errorText.visibility = View.VISIBLE
+                binding.progress.visibility = View.GONE
+                binding.mainGroup.visibility = View.GONE
+                binding.errorGroup.visibility = View.GONE
+            }
+
+            if (state.internetError) {
+                binding.errorGroup.visibility = View.VISIBLE
+                binding.progress.visibility = View.GONE
+                binding.mainGroup.visibility = View.GONE
+                binding.errorText.visibility = View.GONE
+            }
+        }
 
         binding.searchImage.setOnClickListener {
             val textCity = binding.searchCity.text.trim().toString()
@@ -86,8 +111,8 @@ class DayFragment : Fragment() {
 
 
         viewModel.data.observe(viewLifecycleOwner) {
-            Log.d("MyLog", "day fragment: ${it.current.condition.icon}")
-            binding.cityName.text = it.location.name
+
+            binding.cityName.text = it!!.location.name
             binding.currentTemp.text = "${it.current.temp_c} °C"
             binding.condition.text = it.current.condition.text
             Glide.with(binding.imageWeather)
@@ -180,5 +205,9 @@ class DayFragment : Fragment() {
             permissionListener()
             launcher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
+    }
+
+    fun error() {
+        Toast.makeText(requireContext(), "нет такого города", Toast.LENGTH_SHORT).show()
     }
 }

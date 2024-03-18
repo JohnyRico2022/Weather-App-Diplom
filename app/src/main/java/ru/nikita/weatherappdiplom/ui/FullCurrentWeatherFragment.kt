@@ -42,7 +42,7 @@ class FullCurrentWeatherFragment : Fragment() {
         }
 
         viewModel.data.observe(viewLifecycleOwner) {
-            val wind = it.forecast.forecastday[0].day.maxwind_kph
+            val wind = it!!.forecast.forecastday[0].day.maxwind_kph
             val visibility = it.forecast.forecastday[0].day.avgvis_km
             val precipitation = it.forecast.forecastday[0].day.totalprecip_mm
 
