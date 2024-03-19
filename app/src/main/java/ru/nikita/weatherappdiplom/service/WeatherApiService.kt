@@ -1,6 +1,6 @@
 package ru.nikita.weatherappdiplom.service
 
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -12,14 +12,14 @@ private const val BASE_URL = "https://api.weatherapi.com/v1/"
 interface WeatherApiService {
 
     @GET("forecast.json")
-     fun getWeatherData(
+   suspend  fun getWeatherData(
         @Query("key") key: String,
         @Query("q") q: String,
         @Query("days") days: String,
         @Query("aqi") aqi: String,
         @Query("alerts") alerts: String,
         @Query("lang") lang: String,
-    ): Call<WeatherModel>
+    ): Response<WeatherModel>
 }
 
 
