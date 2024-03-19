@@ -7,12 +7,10 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -33,7 +31,6 @@ import ru.nikita.weatherappdiplom.dialogManager.AccessDialog
 import ru.nikita.weatherappdiplom.dialogManager.DialogClickListener
 import ru.nikita.weatherappdiplom.dialogManager.InfoDialog
 import ru.nikita.weatherappdiplom.dialogManager.LocationDialog
-import ru.nikita.weatherappdiplom.model.WeatherState
 import ru.nikita.weatherappdiplom.utils.AndroidUtils
 import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS
 import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS_LANGUAGE
@@ -41,7 +38,6 @@ import ru.nikita.weatherappdiplom.utils.KEY_WEATHER
 import ru.nikita.weatherappdiplom.utils.KEY_WEATHER_CITY
 import ru.nikita.weatherappdiplom.viewmodel.WeatherViewModel
 import ru.nikita.weatherappdiplom.utils.isPermissionGranted
-
 
 class DayFragment : Fragment() {
 
@@ -70,7 +66,6 @@ class DayFragment : Fragment() {
         }
 
         viewModel.stateData.observe(viewLifecycleOwner) { state ->
-
             binding.progress.isVisible = state.loading
             binding.mainGroup.isVisible = state.success
             binding.errorText.isVisible = state.error
@@ -117,11 +112,9 @@ class DayFragment : Fragment() {
             InfoDialog().mainCardInfoDialog(requireContext())
         }
 
-
         binding.mainCard.setOnClickListener {
             findNavController().navigate(R.id.action_dayFragment_to_fullCurrentWeatherFragment)
         }
-
 
         return binding.root
     }
@@ -192,9 +185,5 @@ class DayFragment : Fragment() {
             permissionListener()
             launcher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
-    }
-
-    fun error() {
-        Toast.makeText(requireContext(), "нет такого города", Toast.LENGTH_SHORT).show()
     }
 }
