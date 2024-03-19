@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import ru.nikita.weatherappdiplom.databinding.FragmentAstroBinding
 import ru.nikita.weatherappdiplom.utils.KEY_AUTH
@@ -21,15 +23,22 @@ import ru.nikita.weatherappdiplom.utils.KEY_WEATHER
 import ru.nikita.weatherappdiplom.utils.KEY_WEATHER_CITY
 import ru.nikita.weatherappdiplom.utils.MoonPhases
 import ru.nikita.weatherappdiplom.viewmodel.WeatherViewModel
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class AstroFragment : Fragment() {
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val viewModel: WeatherViewModel by viewModels()
+
+    @Inject
+    lateinit var moonPhases: MoonPhases
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val viewModel: WeatherViewModel by viewModels()
         val binding = FragmentAstroBinding.inflate(inflater, container, false)
 
         val prefSettings = this.requireActivity()
@@ -57,7 +66,7 @@ class AstroFragment : Fragment() {
 
             // Вспомогательный блок кода для перевода фазы луны при смене языка.
             // Прямой подстановкой работает не корректно!
-            binding.moonHelper.setText(MoonPhases().changeMoonPhases(moonPhaseString))
+            binding.moonHelper.setText(moonPhases.changeMoonPhases(moonPhaseString))
             val helperMoonPhase = binding.moonHelper.text
             // Конец вспомогательного блока
 
@@ -69,7 +78,7 @@ class AstroFragment : Fragment() {
                 moonPhaseValue.text = helperMoonPhase
                 moonIlluminationValue.text =
                     "${it.forecast.forecastday[0].astro.moon_illumination} %"
-                moonPhaseImage.setImageResource(MoonPhases().setMoonImage(moonPhaseString))
+                moonPhaseImage.setImageResource(moonPhases.setMoonImage(moonPhaseString))
             }
         }
 

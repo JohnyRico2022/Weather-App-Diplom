@@ -1,8 +1,11 @@
 package ru.nikita.weatherappdiplom.utils
 
 import ru.nikita.weatherappdiplom.R
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MoonPhases() {
+@Singleton
+class MoonPhases @Inject constructor() {
 
     fun changeMoonPhases(phase: String): Int {
         return when (phase) {

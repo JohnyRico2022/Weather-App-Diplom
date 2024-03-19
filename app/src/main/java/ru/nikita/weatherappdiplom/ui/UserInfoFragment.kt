@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nikita.weatherappdiplom.R
 import ru.nikita.weatherappdiplom.databinding.FragmentUserInfoBinding
 import ru.nikita.weatherappdiplom.dialogManager.InfoDialog
@@ -16,16 +17,23 @@ import ru.nikita.weatherappdiplom.utils.KEY_AUTH
 import ru.nikita.weatherappdiplom.utils.KEY_AUTH_SIGNIN
 import ru.nikita.weatherappdiplom.utils.KEY_AUTH_SIGNUP
 import ru.nikita.weatherappdiplom.utils.KEY_LOGIN_NAME
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class UserInfoFragment : Fragment() {
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    //  private lateinit var firebaseAuth: FirebaseAuth
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentUserInfoBinding.inflate(inflater, container, false)
-        firebaseAuth = FirebaseAuth.getInstance()
+  //      val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
         val preferences = this.requireActivity()
             .getSharedPreferences(KEY_AUTH, Context.MODE_PRIVATE)

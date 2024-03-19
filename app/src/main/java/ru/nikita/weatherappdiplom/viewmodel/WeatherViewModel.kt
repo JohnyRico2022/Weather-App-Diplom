@@ -1,18 +1,25 @@
 package ru.nikita.weatherappdiplom.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import ru.nikita.weatherappdiplom.BuildConfig
 import ru.nikita.weatherappdiplom.dto.Hour
 import ru.nikita.weatherappdiplom.dto.WeatherModel
 import ru.nikita.weatherappdiplom.model.WeatherState
-import ru.nikita.weatherappdiplom.service.WeatherApi
+import ru.nikita.weatherappdiplom.service.WeatherApiService
+import javax.inject.Inject
 
-class WeatherViewModel(application: Application) : AndroidViewModel(application) {
+
+@ExperimentalCoroutinesApi
+@HiltViewModel
+class WeatherViewModel @Inject constructor(
+    private val api: WeatherApiService
+) : ViewModel() {
 
     private val _data = MutableLiveData<WeatherModel?>()
     val data: LiveData<WeatherModel?>
@@ -27,7 +34,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
         stateData.postValue(WeatherState(loading = true))
         try {
             val response =
-                WeatherApi.retrofitService.getWeatherData(apiKey, city, "3", "no", "no", language)
+                api.getWeatherData(apiKey, city, "3", "no", "no", language)
 
             if (response.isSuccessful) {
                 val weather = response.body()
