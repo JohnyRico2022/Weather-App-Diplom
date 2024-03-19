@@ -10,22 +10,64 @@
     <FrameLayout
         android:id="@+id/frameLayout_days"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="215dp"
         android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginTop="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/common_spacing"
-        android:visibility="gone"
         android:background="@drawable/border"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/days_recycler"
+        <FrameLayout
+            android:id="@+id/info_frame_top"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_week_temp" />
+            android:visibility="gone">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/days_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_week_temp" />
+
+        </FrameLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/white"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/error_frame_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_error_outline_96" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/error_internet_frame_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_no_internet_96" />
+        </FrameLayout>
 
     </FrameLayout>
 
@@ -34,42 +76,94 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="@dimen/common_spacing"
-        android:visibility="gone"
         android:background="@drawable/border"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout_days">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/hourly_forecast"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/hours_recycler"
+        <FrameLayout
+            android:id="@+id/info_frame_bottom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            android:layout_marginTop="50dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_week_temp" />
+            android:visibility="visible">
 
-        <TextView
-            android:id="@+id/text_hours_recycler"
-            android:text="@string/text_click_on_day"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            <TextView
+                android:id="@+id/text_hours_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/hourly_forecast"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hours_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_week_temp" />
+
+            <TextView
+                android:id="@+id/text_hours_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/common_spacing"
+                android:layout_marginEnd="@dimen/common_spacing"
+                android:gravity="center"
+                android:text="@string/text_click_on_day"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+        </FrameLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/common_spacing"
-            android:layout_marginEnd="@dimen/common_spacing"
-            android:textSize="30sp"
-            android:gravity="center"
-            android:textColor="@color/white"/>
+            android:indeterminateTint="@color/white"
+            android:visibility="gone"/>
+
+        <FrameLayout
+            android:id="@+id/error_frame_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/common_spacing"
+                android:layout_marginEnd="@dimen/common_spacing"
+                android:gravity="center"
+                android:text="@string/error_city_name"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/error_internet_frame_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/common_spacing"
+                android:layout_marginEnd="@dimen/common_spacing"
+                android:gravity="center"
+                android:text="@string/internet_error"
+                android:textColor="@color/white"
+                android:textSize="22sp" />
+        </FrameLayout>
 
     </FrameLayout>
 
@@ -78,7 +172,7 @@
         style="@style/data_card"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,13 +181,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_access_text"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:layout_marginStart="@dimen/common_spacing"
             android:layout_marginEnd="@dimen/common_spacing"
-            android:layout_gravity="center"/>
-
+            android:gravity="center"
+            android:text="@string/no_access_text"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
     </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

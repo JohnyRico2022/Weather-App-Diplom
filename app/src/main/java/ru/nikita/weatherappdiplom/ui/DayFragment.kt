@@ -71,25 +71,11 @@ class DayFragment : Fragment() {
 
         viewModel.stateData.observe(viewLifecycleOwner) { state ->
 
-            if (state.success) {
-                binding.mainGroup.visibility = View.VISIBLE
-                binding.progress.visibility = View.GONE
-                binding.errorText.visibility = View.GONE
-                binding.errorGroup.visibility = View.GONE
-            }
-            if (state.error) {
-                binding.errorText.visibility = View.VISIBLE
-                binding.progress.visibility = View.GONE
-                binding.mainGroup.visibility = View.GONE
-                binding.errorGroup.visibility = View.GONE
-            }
+            binding.progress.isVisible = state.loading
+            binding.mainGroup.isVisible = state.success
+            binding.errorText.isVisible = state.error
+            binding.errorGroup.isVisible = state.internetError
 
-            if (state.internetError) {
-                binding.errorGroup.visibility = View.VISIBLE
-                binding.progress.visibility = View.GONE
-                binding.mainGroup.visibility = View.GONE
-                binding.errorText.visibility = View.GONE
-            }
         }
 
         binding.searchImage.setOnClickListener {
@@ -100,6 +86,7 @@ class DayFragment : Fragment() {
                     .putString(KEY_WEATHER_CITY, textCity)
                     .apply()
                 AndroidUtils.hideKeyboard(requireView())
+
                 CoroutineScope(Dispatchers.Main).launch {
                     viewModel.getWeather(textCity, language)
                 }

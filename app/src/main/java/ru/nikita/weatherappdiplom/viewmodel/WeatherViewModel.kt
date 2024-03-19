@@ -23,6 +23,8 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
     private val apiKey = BuildConfig.MY_API_KEY
     fun getWeather(city: String, language: String) {
 
+        stateData.postValue(WeatherState(loading = true))
+
         WeatherApi.retrofitService
             .getWeatherData(apiKey, city, "3", "no", "no", language)
             .enqueue(object : Callback<WeatherModel> {

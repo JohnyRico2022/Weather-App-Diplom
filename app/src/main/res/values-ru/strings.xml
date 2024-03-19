@@ -71,5 +71,5 @@
     <string name="access_key_error">Ошибка ключа доступа (API key)!</string>
     <string name="rates_this_app">Ваша оценка: %1$s. Спасибо за оценку!"</string>
     <string name="error_city_name">Некорректное название города! Попробуйте снова!</string>
-    <string name="internet_error">Хьюстон, у нас проблема! Похоже неполадки с интернетом! Проверьте не включен ли авиарежим!</string>
+    <string name="internet_error">Хьюстон, у нас проблема! Похоже неполадки с интернетом!</string>
 </resources>

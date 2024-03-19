@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -53,7 +54,7 @@ class WeekFragment : Fragment() {
         }
 
 
-        val adapterDays = DaysAdapter(object : OnInteractionListener{
+        val adapterDays = DaysAdapter(object : OnInteractionListener {
             override fun onItemClicked(itemDay: Forecastday) {
                 val listHour = itemDay.hour
                 viewModel.dataHour.value = listHour
@@ -64,17 +65,32 @@ class WeekFragment : Fragment() {
         })
         binding.daysRecycler.adapter = adapterDays
 
-        viewModel.data.observe(viewLifecycleOwner){
+        viewModel.data.observe(viewLifecycleOwner) {
             adapterDays.submitList(it!!.forecast.forecastday)
         }
-
 
 
         val adapterHours = HoursAdapter()
         binding.hoursRecycler.adapter = adapterHours
 
-        viewModel.dataHour.observe(viewLifecycleOwner){
+        viewModel.dataHour.observe(viewLifecycleOwner) {
             adapterHours.submitList(it)
+        }
+
+        viewModel.stateData.observe(viewLifecycleOwner) { state ->
+            with(binding) {
+                progressBottom.isVisible = state.loading
+                progressTop.isVisible = state.loading
+
+                infoFrameBottom.isVisible = state.success
+                infoFrameTop.isVisible = state.success
+
+                errorFrameBottom.isVisible = state.error
+                errorFrameTop.isVisible = state.error
+
+                errorInternetFrameBottom.isVisible = state.internetError
+                errorInternetFrameTop.isVisible = state.internetError
+            }
         }
 
         return binding.root
