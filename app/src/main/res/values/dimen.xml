@@ -2,6 +2,7 @@
 <resources>
     <dimen name="common_spacing">10dp</dimen>
     <dimen name="large_spacing">30dp</dimen>
+    <dimen name="mega_spacing">50dp</dimen>
     <dimen name="mini_spacing">5dp</dimen>
     <dimen name="common_padding">4dp</dimen>
 </resources>
