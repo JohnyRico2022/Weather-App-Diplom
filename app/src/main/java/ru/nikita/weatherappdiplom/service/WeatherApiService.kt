@@ -5,8 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import ru.nikita.weatherappdiplom.dto.WeatherModel
 
-// private const val BASE_URL = "https://api.weatherapi.com/v1/"
-
 interface WeatherApiService {
 
     @GET("forecast.json")
@@ -19,15 +17,3 @@ interface WeatherApiService {
         @Query("lang") lang: String,
     ): Response<WeatherModel>
 }
-
-
-/*val retrofit: Retrofit = Retrofit.Builder()
-    .baseUrl(BASE_URL)
-    .addConverterFactory(GsonConverterFactory.create())
-    .build()
-
-object WeatherApi {
-    val retrofitService: WeatherApiService by lazy {
-        retrofit.create(WeatherApiService::class.java)
-    }
-}*/
