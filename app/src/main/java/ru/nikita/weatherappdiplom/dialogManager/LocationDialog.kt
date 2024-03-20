@@ -8,7 +8,7 @@ class LocationDialog() {
 
     fun settingsLocation(context: Context, listener: DialogClickListener) {
         AlertDialog.Builder(context)
-            .setIcon(R.drawable.ic_info_outline_24)
+            .setIcon(R.drawable.ic_error_24_black)
             .setTitle(R.string.attention)
             .setMessage(R.string.gps_question)
             .setPositiveButton(R.string.ok) { _, _ ->
