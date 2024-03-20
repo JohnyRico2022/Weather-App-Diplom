@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DayFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_weather_day" />
+
+    <ImageView
+        android:id="@+id/info"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:background="@drawable/border"
+        android:contentDescription="@string/info_description"
+        android:padding="@dimen/common_padding"
+        android:src="@drawable/ic_info_outline_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/location"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:background="@drawable/border"
+        android:contentDescription="@string/info_description"
+        android:padding="@dimen/common_padding"
+        android:src="@drawable/ic_my_location_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/search_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:layout_marginBottom="@dimen/common_spacing"
+        android:background="@drawable/border"
+        android:padding="4dp"
+        android:src="@drawable/ic_search_24"
+        app:layout_constraintBottom_toTopOf="@+id/main_card"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/search_city"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:layout_marginBottom="@dimen/common_spacing"
+        android:background="@drawable/border"
+        android:hint="@string/name_of_city"
+        android:padding="4dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toStartOf="@+id/search_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/info" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_card"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:layout_marginBottom="@dimen/large_spacing"
+        android:background="@drawable/border"
+        app:cardCornerRadius="@dimen/common_spacing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_city">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/error_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mega_spacing"
+            android:layout_marginEnd="@dimen/mega_spacing"
+            android:gravity="center"
+            android:text="@string/error_city_name"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/internet_error_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_spacing"
+            android:src="@drawable/ic_no_internet_48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/internet_error_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_spacing"
+            android:layout_marginEnd="@dimen/large_spacing"
+            android:layout_marginBottom="@dimen/large_spacing"
+            android:gravity="center"
+            android:text="@string/internet_error"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/error_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="internet_error_image, internet_error_text" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/main_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="city_name,current_temp, condition, image_weather" />
+
+        <TextView
+            android:id="@+id/city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            app:layout_constraintBottom_toBottomOf="@+id/current_temp"
+            app:layout_constraintEnd_toStartOf="@+id/current_temp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/current_temp"
+            tools:text="Санкт-Петербург" />
+
+        <TextView
+            android:id="@+id/current_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/large_spacing"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toTopOf="@+id/image_weather"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="23 °C" />
+
+        <TextView
+            android:id="@+id/condition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_spacing"
+            android:layout_marginEnd="@dimen/common_spacing"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_weather"
+            app:layout_constraintEnd_toStartOf="@+id/image_weather"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image_weather"
+            tools:text="sunny" />
+
+        <ImageView
+            android:id="@+id/image_weather"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="@dimen/large_spacing"
+            android:layout_marginBottom="@dimen/large_spacing"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@drawable/ic_launcher_foreground" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.FullCurrentWeatherFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_weather_day" />
+
+    <ImageView
+        android:id="@+id/back_to_fragment_day"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:background="@drawable/border"
+        android:contentDescription="@string/back"
+        android:padding="4dp"
+        android:src="@drawable/ic_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_full_current_weather_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/error_frame"
+        style="@style/data_card"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_to_fragment_day">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/common_spacing"
+            android:layout_marginEnd="@dimen/common_spacing"
+            android:gravity="center"
+            android:text="@string/error_city_name"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/internet_error_frame"
+        style="@style/data_card"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_to_fragment_day">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/large_spacing"
+            android:src="@drawable/ic_no_internet_48" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginStart="@dimen/common_spacing"
+            android:layout_marginEnd="@dimen/common_spacing"
+            android:layout_marginBottom="@dimen/large_spacing"
+            android:gravity="center"
+            android:text="@string/internet_error"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/common_spacing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_to_fragment_day">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="frame_layout_top, frame_layout_middle,frame_layout_bottom" />
+
+            <FrameLayout
+                android:id="@+id/frame_layout_top"
+                style="@style/data_card"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                app:layout_constraintBottom_toTopOf="@+id/frame_layout_middle"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/parameter_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wind_speed" />
+
+                        <TextView
+                            android:id="@+id/wind_value"
+                            style="@style/parameter_value"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            tools:text="00" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/parameter_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/min_temp" />
+
+                        <TextView
+                            android:id="@+id/min_temp_value"
+                            style="@style/parameter_value"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            tools:text="00" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/parameter_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/max_temp" />
+
+                        <TextView
+                            android:id="@+id/max_temp_value"
+                            style="@style/parameter_value"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            tools:text="00" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/parameter_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/average_temp" />
+
+                        <TextView
+                            android:id="@+id/average_temp_value"
+                            style="@style/parameter_value"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            tools:text="00" />
+
+                    </FrameLayout>
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame_layout_middle"
+                style="@style/data_card"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                app:layout_constraintBottom_toTopOf="@+id/frame_layout_bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frame_layout_top">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/parameter_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/average_visibility" />
+
+                        <TextView
+                            android:id="@+id/average_visibility_value"
+                            style="@style/parameter_value"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            tools:text="00" />
+
+                    </FrameLayout>
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame_layout_bottom"
+                style="@style/data_card"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:background="@drawable/border"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frame_layout_middle">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/parameter_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/precipitation" />
+
+                        <TextView
+                            android:id="@+id/precipitation_value"
+                            style="@style/parameter_value"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            tools:text="00" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/parameter_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/humidity" />
+
+                        <TextView
+                            android:id="@+id/humidity_value"
+                            style="@style/parameter_value"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            tools:text="00" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/parameter_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rain_chance" />
+
+                        <TextView
+                            android:id="@+id/rain_chance_value"
+                            style="@style/parameter_value"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            tools:text="00" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/parameter_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/snow_chance" />
+
+                        <TextView
+                            android:id="@+id/snow_chance_value"
+                            style="@style/parameter_value"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            tools:text="00" />
+
+                    </FrameLayout>
+                </LinearLayout>
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
