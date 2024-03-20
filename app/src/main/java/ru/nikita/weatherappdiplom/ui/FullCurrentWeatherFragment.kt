@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import ru.nikita.weatherappdiplom.R
 import ru.nikita.weatherappdiplom.databinding.FragmentFullCurrentWeatherBinding
@@ -20,10 +22,14 @@ import ru.nikita.weatherappdiplom.utils.KEY_WEATHER
 import ru.nikita.weatherappdiplom.utils.KEY_WEATHER_CITY
 import ru.nikita.weatherappdiplom.viewmodel.WeatherViewModel
 
+
+@AndroidEntryPoint
 class FullCurrentWeatherFragment : Fragment() {
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val viewModel: WeatherViewModel by viewModels()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

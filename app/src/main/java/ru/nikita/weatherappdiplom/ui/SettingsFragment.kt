@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import ru.nikita.weatherappdiplom.BuildConfig
 import ru.nikita.weatherappdiplom.R
 import ru.nikita.weatherappdiplom.databinding.FragmentSettingsBinding
@@ -16,6 +17,7 @@ import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS_LANGUAGE
 import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS_RADIO_BUTTON
 import ru.nikita.weatherappdiplom.utils.KEY_SETTINGS_RATING
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment() {
 
     override fun onCreateView(
@@ -61,7 +63,6 @@ class SettingsFragment : Fragment() {
                 .apply()
         }
 
-
         binding.ratingBar.rating = getRating
 
         binding.ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
@@ -71,7 +72,6 @@ class SettingsFragment : Fragment() {
                     .putFloat(KEY_SETTINGS_RATING, rating)
                     .apply()
 
-
                 Toast.makeText(
                     requireContext(), getString(R.string.rates_this_app, rating.toString()),
                     Toast.LENGTH_SHORT
@@ -79,7 +79,6 @@ class SettingsFragment : Fragment() {
 
             }
         }
-
 
         return binding.root
     }

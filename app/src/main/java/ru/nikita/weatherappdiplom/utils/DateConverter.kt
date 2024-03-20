@@ -5,7 +5,6 @@ class DateConverter {
     fun convertDate(dateFromServer: String): String {
 
         //    dateFromServer = "2024-02-27"
-
         return dateFromServer[8].toString() + dateFromServer[9]
             .toString() + "." + dateFromServer[5].toString() + dateFromServer[6].toString()
     }
@@ -13,7 +12,6 @@ class DateConverter {
     fun convertDateWithHours(dateFromServer: String): String {
 
         // dateWithHourFromServer = "2024-02-28 23:00"
-
         return dateFromServer[8].toString() + dateFromServer[9]
             .toString() + "." + dateFromServer[5].toString() + dateFromServer[6]
             .toString() + " " + dateFromServer[11].toString() + dateFromServer[12]

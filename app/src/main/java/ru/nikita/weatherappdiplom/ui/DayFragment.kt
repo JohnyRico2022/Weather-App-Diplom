@@ -22,8 +22,10 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import ru.nikita.weatherappdiplom.R
 import ru.nikita.weatherappdiplom.databinding.FragmentDayBinding
@@ -38,12 +40,22 @@ import ru.nikita.weatherappdiplom.utils.KEY_WEATHER
 import ru.nikita.weatherappdiplom.utils.KEY_WEATHER_CITY
 import ru.nikita.weatherappdiplom.viewmodel.WeatherViewModel
 import ru.nikita.weatherappdiplom.utils.isPermissionGranted
+import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class DayFragment : Fragment() {
 
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val viewModel: WeatherViewModel by viewModels()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var launcher: ActivityResultLauncher<String>
+
+    @Inject
+    lateinit var hideKeyboard: AndroidUtils
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -80,7 +92,7 @@ class DayFragment : Fragment() {
                 prefWeather.edit()
                     .putString(KEY_WEATHER_CITY, textCity)
                     .apply()
-                AndroidUtils.hideKeyboard(requireView())
+                hideKeyboard.hideKeyboard(requireView())
 
                 CoroutineScope(Dispatchers.Main).launch {
                     viewModel.getWeather(textCity, language)
@@ -125,6 +137,7 @@ class DayFragment : Fragment() {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun getLocation(viewModel: WeatherViewModel) {
 
         if (!isLocationEnabled()) {

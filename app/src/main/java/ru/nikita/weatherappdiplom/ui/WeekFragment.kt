@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import ru.nikita.weatherappdiplom.adapter.DaysAdapter
 import ru.nikita.weatherappdiplom.adapter.HoursAdapter
@@ -26,13 +28,19 @@ import ru.nikita.weatherappdiplom.utils.KEY_WEATHER_CITY
 import ru.nikita.weatherappdiplom.viewmodel.WeatherViewModel
 
 
+@AndroidEntryPoint
 class WeekFragment : Fragment() {
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val viewModel: WeatherViewModel by viewModels()
+
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val viewModel: WeatherViewModel by viewModels()
+
         val binding = FragmentWeekBinding.inflate(inflater, container, false)
 
         val prefSettings = this.requireActivity()
