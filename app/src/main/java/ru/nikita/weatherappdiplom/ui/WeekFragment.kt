@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -57,7 +58,7 @@ class WeekFragment : Fragment() {
         val userSignIn = prefAuth.getString(KEY_AUTH_SIGNUP, "signUp").toString()
         updateUI(binding, userSignIn, userSignUp)
 
-        CoroutineScope(Dispatchers.Main).launch {
+        lifecycleScope.launch {
             viewModel.getWeather(city, language)
         }
 

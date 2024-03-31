@@ -22,8 +22,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class UserInfoFragment : Fragment() {
 
-    //  private lateinit var firebaseAuth: FirebaseAuth
-
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
 
@@ -33,7 +31,6 @@ class UserInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentUserInfoBinding.inflate(inflater, container, false)
-  //      val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
         val preferences = this.requireActivity()
             .getSharedPreferences(KEY_AUTH, Context.MODE_PRIVATE)

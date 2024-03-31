@@ -31,7 +31,7 @@ class WeatherViewModel @Inject constructor(
 
     private val apiKey = BuildConfig.MY_API_KEY
     fun getWeather(city: String, language: String) = viewModelScope.launch {
-        stateData.postValue(WeatherState(loading = true))
+        stateData.value = WeatherState(loading = true)
         try {
             val response =
                 api.getWeatherData(apiKey, city, "3", "no", "no", language)
@@ -40,14 +40,14 @@ class WeatherViewModel @Inject constructor(
                 val weather = response.body()
                 _data.value = weather
 
-                stateData.postValue(WeatherState(success = true))
+                stateData.setValue(WeatherState(success = true))
 
             } else {
-                stateData.postValue(WeatherState(error = true))
+                stateData.setValue(WeatherState(error = true))
             }
 
         } catch (e: Exception) {
-            stateData.postValue(WeatherState(internetError = true))
+            stateData.setValue(WeatherState(internetError = true))
         }
     }
 }

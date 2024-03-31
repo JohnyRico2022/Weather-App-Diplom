@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.Priority
@@ -73,7 +74,7 @@ class DayFragment : Fragment() {
             .getSharedPreferences(KEY_WEATHER, Context.MODE_PRIVATE)
         val city = prefWeather.getString(KEY_WEATHER_CITY, "Moscow").toString()
 
-        CoroutineScope(Dispatchers.Main).launch {
+        lifecycleScope.launch {
             viewModel.getWeather(city, language)
         }
 
@@ -177,7 +178,11 @@ class DayFragment : Fragment() {
                 .addOnCompleteListener {
                     val currentCity = "${it.result.latitude},${it.result.longitude}"
 
-                    CoroutineScope(Dispatchers.Main).launch {
+                   /* CoroutineScope(Dispatchers.Main).launch {
+                        viewModel.getWeather(currentCity, language)
+                    }*/
+
+                    lifecycleScope.launch {
                         viewModel.getWeather(currentCity, language)
                     }
 

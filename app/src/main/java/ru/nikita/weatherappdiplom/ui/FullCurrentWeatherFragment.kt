@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -44,7 +45,7 @@ class FullCurrentWeatherFragment : Fragment() {
             .getSharedPreferences(KEY_WEATHER, Context.MODE_PRIVATE)
         val city = prefWeather.getString(KEY_WEATHER_CITY, "Moscow").toString()
 
-        CoroutineScope(Dispatchers.Main).launch {
+        lifecycleScope.launch {
             viewModel.getWeather(city, language)
         }
 

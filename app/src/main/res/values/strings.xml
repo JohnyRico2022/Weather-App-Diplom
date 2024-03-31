@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weather App Diplom</string>
+    <string name="app_name">Weather in your pocket</string>
     <string name="sun_rise">Sun rise</string>
     <string name="sun_set">Sun set</string>
     <string name="moon_rise">Moon rise</string>

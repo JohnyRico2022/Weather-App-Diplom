@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Weather App Diplom</string>
+    <string name="app_name">Погода в кармане</string>
     <string name="sun_rise">Восход солнца</string>
     <string name="sun_set">Заход солнца</string>
     <string name="moon_rise">Восход луны</string>
